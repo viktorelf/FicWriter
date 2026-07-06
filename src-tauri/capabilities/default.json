@@ -1,0 +1,46 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:default",
+    "opener:default",
+    "dialog:default",
+
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-maximize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-is-maximized",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-is-fullscreen",
+    "core:window:allow-set-resizable",
+    "core:window:allow-set-shadow",
+
+    "fs:allow-exists",
+    "fs:allow-mkdir",
+
+    "fs:allow-read-file",
+    "fs:allow-write-file",
+
+    "fs:allow-appdata-read",
+    "fs:allow-appdata-read-recursive",
+    "fs:allow-appdata-write",
+    "fs:allow-appdata-write-recursive",
+
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        "$APPDATA/**/*",
+        "$HOME/**/*",
+        "$DESKTOP/**/*",
+        "$DOCUMENT/**/*",
+        "$DOWNLOAD/**/*",
+        "$PICTURE/**/*"
+      ],
+      "deny": []
+    }
+  ]
+}

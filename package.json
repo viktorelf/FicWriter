@@ -1,0 +1,40 @@
+{
+  "name": "ficwriter",
+  "private": true,
+  "version": "0.1.4",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.5",
+    "@tauri-apps/api": "2.5.0",
+    "@tauri-apps/plugin-dialog": "2.2.2",
+    "@tauri-apps/plugin-fs": "2.3.0",
+    "@tauri-apps/plugin-log": "2.2.0",
+    "@tauri-apps/plugin-opener": "2.3.0",
+    "@tiptap/extension-color": "^3.18.0",
+    "@tiptap/extension-font-family": "^3.18.0",
+    "@tiptap/extension-text-align": "^3.18.0",
+    "@tiptap/extension-text-style": "^3.18.0",
+    "@tiptap/extension-underline": "^3.18.0",
+    "@tiptap/react": "^3.18.0",
+    "@tiptap/starter-kit": "^3.18.0",
+    "mammoth": "^1.11.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.13.0",
+    "tldraw": "^2.4.6"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.5.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
+  }
+}

@@ -1,0 +1,3125 @@
+/* src/screens/editor.css */
+/* ✅ ВАЖНО: отключаем скролл ТОЛЬКО на экране редактора */
+
+.editor-root {
+
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;        /* страница редактора не скроллится */
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+
+}
+
+.editor-top-right > .ghost-btn:first-child{
+  display: none;
+}
+
+
+
+/* ===== Верхняя строка (назад / заголовок / счетчик / сохранить) ===== */
+
+
+
+.editor-top {
+  display: grid;
+
+
+  grid-template-columns: auto 1fr auto;
+
+
+
+  align-items: center;
+
+
+
+  gap: 10px;
+
+
+
+  padding: 10px 16px;
+
+
+
+  background: rgba(20, 22, 25, 0.55);
+
+
+
+  backdrop-filter: blur(10px);
+
+
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+
+
+
+}
+
+
+
+.editor-title {
+
+
+
+  text-align: center;
+
+
+
+  font-size: 20px;
+
+
+
+  font-weight: 700;
+
+
+
+  color: rgba(255, 255, 255, 0.92);
+
+
+
+  user-select: none;
+
+
+
+}
+
+
+
+.editor-top-right {
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 8px;
+
+
+
+  justify-content: flex-end;
+
+
+
+}
+
+
+
+.editor-counter {
+
+
+
+  font-size: 12px;
+
+
+
+  color: rgba(255, 255, 255, 0.75);
+
+
+
+  white-space: nowrap;
+
+
+
+}
+
+.editor-top .ghost-btn,
+.editor-top .save-btn{
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+
+
+
+/* ===== Кнопки ===== */
+
+
+
+.pill-btn,
+
+
+
+.ghost-btn,
+
+
+
+.save-btn {
+
+
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+
+
+  background: rgba(30, 32, 36, 0.45);
+
+
+
+  color: rgba(255, 255, 255, 0.92);
+
+
+
+  border-radius: 999px;
+
+
+
+  padding: 10px 16px;
+
+
+
+  font-size: 14px;
+
+
+
+  cursor: pointer;
+
+
+
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+
+
+
+}
+
+
+
+.pill-btn:hover,
+
+
+
+.ghost-btn:hover,
+
+
+
+.save-btn:hover {
+
+
+
+  background: rgba(30, 32, 36, 0.62);
+
+
+
+  border-color: rgba(255, 255, 255, 0.28);
+
+
+
+}
+
+
+
+.pill-btn:active,
+
+
+
+.ghost-btn:active,
+
+
+
+.save-btn:active {
+
+
+
+  transform: translateY(1px);
+
+
+
+}
+
+
+
+.save-btn[disabled] {
+
+
+
+  opacity: 0.6;
+
+
+
+  cursor: default;
+
+
+
+}
+
+
+
+.save-btn.is-saved {
+
+
+
+  border-color: rgba(140, 255, 200, 0.35);
+
+
+
+}
+
+
+
+/* ===== Панель инструментов ===== */
+
+
+
+.editor-toolbar {
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 10px;
+
+
+
+  flex-wrap: wrap;
+
+
+
+  padding: 10px 18px;
+
+
+
+  background: rgba(60, 64, 70, 0.45);
+
+
+
+  backdrop-filter: blur(10px);
+
+
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
+
+
+
+}
+
+
+
+.tool-btn.is-on {
+
+
+
+  border-color: rgba(140, 255, 200, 0.35);
+
+
+
+}
+
+
+
+.tool-btn {
+
+
+
+  height: 34px;
+
+
+
+  min-width: 34px;
+
+
+
+  padding: 0 10px;
+
+
+
+  border-radius: 10px;
+
+
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+
+
+  background: rgba(20, 22, 25, 0.35);
+
+
+
+  color: rgba(255, 255, 255, 0.9);
+
+
+
+  cursor: pointer;
+
+
+
+}
+
+.align-icon{
+
+
+
+  display: inline-block;
+
+
+
+  width: 16px;
+
+
+
+  height: 12px;
+
+
+
+  background-repeat: no-repeat;
+
+
+
+  background-size: 16px 12px;
+
+
+
+  background-position: center;
+
+
+
+}
+
+.align-icon--left{
+
+
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Crect x='1' y='1' width='14' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='1' y='5' width='10' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='1' y='9' width='13' height='1.5' rx='0.75' fill='white'/%3E%3C/svg%3E");
+
+
+
+}
+
+.align-icon--center{
+
+
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Crect x='1' y='1' width='14' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='3' y='5' width='10' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='2' y='9' width='12' height='1.5' rx='0.75' fill='white'/%3E%3C/svg%3E");
+
+
+
+}
+
+.align-icon--right{
+
+
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Crect x='1' y='1' width='14' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='5' y='5' width='10' height='1.5' rx='0.75' fill='white'/%3E%3Crect x='2' y='9' width='13' height='1.5' rx='0.75' fill='white'/%3E%3C/svg%3E");
+
+
+
+}
+
+
+
+.tool-btn.is-wide{
+
+
+
+  min-width: 56px;
+
+
+
+  padding: 0 14px;
+
+
+
+}
+
+
+
+.tool-btn.is-auto-dash{
+
+
+
+  min-width: 74px;
+
+
+
+  height: auto;
+
+
+
+  padding: 6px 10px;
+
+
+
+  line-height: 1.05;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: center;
+
+
+
+  gap: 2px;
+
+
+
+}
+
+
+
+.tool-btn.is-auto-dash .auto-dash-top{
+
+
+
+  font-size: 14px;
+
+
+
+  line-height: 1;
+
+
+
+}
+
+
+
+.tool-btn.is-auto-dash .auto-dash-bottom{
+
+
+
+  font-size: 11px;
+
+
+
+  line-height: 1.05;
+
+
+
+}
+
+
+
+.tool-btn:hover {
+
+
+
+  background: rgba(20, 22, 25, 0.55);
+
+
+
+  border-color: rgba(255, 255, 255, 0.22);
+
+
+
+}
+
+
+
+.tool-sep {
+
+
+
+  width: 1px;
+
+
+
+  height: 24px;
+
+
+
+  background: rgba(255, 255, 255, 0.12);
+
+
+
+  margin: 0 6px;
+
+
+
+}
+
+
+
+.tool-select {
+
+
+
+  height: 34px;
+
+
+
+  padding: 0 10px;
+
+
+
+  border-radius: 10px;
+
+
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+
+
+  background: rgba(30, 32, 36, 0.55);
+
+
+
+  color: #fff;
+
+
+
+  outline: none;
+
+
+
+}
+
+
+
+.tool-select option{
+
+
+
+  background: rgba(30, 32, 36, 0.95);
+
+
+
+  color: #fff;
+
+
+
+}
+
+
+
+.tool-color {
+
+
+
+  width: 44px;
+
+
+
+  height: 34px;
+
+
+
+  border-radius: 10px;
+
+
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+
+
+  background: rgba(20, 22, 25, 0.35);
+
+
+
+  padding: 4px;
+
+
+
+}
+
+
+
+/* ===== Ошибка сохранения ===== */
+
+
+
+.save-error {
+
+
+
+  margin: 12px 18px 0;
+
+
+
+  padding: 12px 14px;
+
+
+
+  border-radius: 12px;
+
+
+
+  background: rgba(140, 40, 40, 0.28);
+
+
+
+  border: 1px solid rgba(255, 120, 120, 0.35);
+
+
+
+  color: rgba(255, 235, 235, 0.95);
+
+
+
+  backdrop-filter: blur(8px);
+
+
+
+}
+
+
+
+.save-error-details {
+
+
+
+  display: block;
+
+
+
+  margin-top: 6px;
+
+
+
+  font-size: 12px;
+
+
+
+  opacity: 0.85;
+
+
+
+  word-break: break-word;
+
+
+
+}
+
+
+
+/* ===== Область редактора ===== */
+
+
+
+.editor-area {
+
+
+
+  flex: 1;
+
+
+
+  display: flex;
+
+
+
+  justify-content: center;
+
+  position: relative;
+
+
+
+  padding: 22px 18px calc(26px + env(safe-area-inset-bottom));
+
+
+
+  overflow: hidden; /* ✅ чтобы страница не пыталась скроллиться */
+
+
+
+}
+
+
+
+.editor-paper {
+
+
+
+  width: min(1100px, 92vw);
+
+
+
+  height: calc(100% - 30px);
+
+
+
+  max-height: calc(100% - 30px);
+
+
+
+  margin-top: 0;
+
+
+
+  overflow: auto;
+
+
+
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+
+
+
+  overscroll-behavior: contain;
+
+
+
+  overflow-anchor: none;
+
+
+
+  border-radius: 22px;
+
+
+
+  background: rgba(55, 58, 64, 0.42);
+
+
+
+  backdrop-filter: blur(8px) saturate(1.1);
+
+
+
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+
+
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+
+
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+
+
+
+  position: relative;
+
+
+
+  scrollbar-width: auto; /* firefox: normal width */
+
+
+
+  scrollbar-color: rgba(255,255,255,0.28) transparent;
+
+
+
+}
+
+
+
+.editor-paper::-webkit-scrollbar { width: 14px; }
+
+
+
+.editor-paper::-webkit-scrollbar-track { background: transparent; }
+
+
+
+.editor-paper::-webkit-scrollbar-thumb {
+
+
+
+  background: rgba(255,255,255,0.22);
+
+
+
+  border-radius: 999px;
+
+
+
+  border: 4px solid transparent;   /* визуально делает thumb тоньше/аккуратнее */
+
+
+
+  background-clip: padding-box;
+
+
+
+}
+
+
+
+.editor-paper::-webkit-scrollbar-thumb:hover {
+
+
+
+  background: rgba(255,255,255,0.35);
+
+
+
+  border: 4px solid transparent;
+
+
+
+  background-clip: padding-box;
+
+
+
+}
+
+
+
+/* fw-editor больше НЕ скроллится, он просто наполняет лист */
+
+
+
+.fw-editor {
+
+
+
+  outline: none;
+
+
+
+  color: rgba(255, 255, 255, 0.92);
+
+
+
+  line-height: 1.65;
+
+
+
+  white-space: pre-wrap;
+
+
+
+  overflow-anchor: none;
+
+
+
+  padding: 26px 38px 26px 48px;
+
+
+
+  box-sizing: border-box;
+
+
+
+  height: auto;
+
+
+
+  overflow: visible;
+
+
+
+}
+
+
+
+/* TipTap editor (сам текст) */
+
+
+
+.fw-editor .ProseMirror {
+
+
+
+  font-family: Inter, system-ui, Arial;
+
+
+
+  font-size: 16px;
+
+
+
+}
+
+
+
+.fw-editor .ProseMirror p {
+
+
+
+  margin: 0 0 12px;
+
+
+
+}
+
+
+
+/* редактируемый заголовок по центру */
+
+
+
+.editor-title-input {
+
+
+
+  width: 100%;
+
+
+
+  max-width: 520px;
+
+
+
+  justify-self: center;
+
+
+
+  text-align: center;
+
+
+
+  font-size: 20px;
+
+
+
+  font-weight: 600;
+
+
+
+  color: rgba(255,255,255,0.92);
+
+
+
+  background: transparent;
+
+
+
+  border: 1px solid transparent;
+
+
+
+  border-radius: 16px;
+
+
+
+  padding: 6px 10px;
+
+
+
+  outline: none;
+
+
+
+}
+
+
+
+.editor-title-input:hover {
+
+
+
+  border-color: rgba(255,255,255,0.18);
+
+
+
+  background: rgba(0,0,0,0.12);
+
+
+
+}
+
+
+
+.editor-title-input:focus {
+
+
+
+  border-color: rgba(255,255,255,0.28);
+
+
+
+  background: rgba(0,0,0,0.18);
+
+
+
+}
+
+
+
+/* ===== Заметки ===== */
+
+
+
+.pinned-photos-layer {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 18;
+
+}
+
+
+.pinned-photo-card {
+
+  position: absolute;
+
+  pointer-events: auto;
+
+  border-radius: 18px;
+
+  overflow: visible;
+
+  box-shadow: 0 14px 32px rgba(0,0,0,0.28);
+
+}
+
+
+.pinned-photo-frame {
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.22);
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(8px);
+
+}
+
+
+.pinned-photo-image,
+.pinned-photo-placeholder {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+}
+
+
+.pinned-photo-image {
+
+  object-fit: cover;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+}
+
+
+.pinned-photo-placeholder {
+
+  display: grid;
+
+  place-items: center;
+
+  color: rgba(255,255,255,0.82);
+
+  font-size: 14px;
+
+  letter-spacing: 0.03em;
+
+}
+
+
+.pinned-photo-handle,
+.pinned-photo-remove,
+.pinned-photo-resize,
+.pin-fab {
+
+  position: fixed;
+
+  width: 46px;
+
+  height: 46px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background: rgba(20,22,25,0.35);
+
+  backdrop-filter: blur(6px);
+
+  color: rgba(255,255,255,0.92);
+
+  display: grid;
+
+  place-items: center;
+
+  cursor: pointer;
+
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+
+  z-index: 50;
+
+}
+
+
+.pin-fab {
+
+  right: 18px;
+
+  bottom: 126px;
+
+}
+
+
+.pin-fab:hover,
+.pinned-photo-remove:hover,
+.pinned-photo-resize:hover {
+
+  transform: translateY(-1px);
+
+  background: rgba(20,22,25,0.5);
+
+}
+
+
+.pinned-photo-handle {
+
+  position: absolute;
+
+  left: 10px;
+
+  top: -16px;
+
+  width: 34px;
+
+  height: 34px;
+
+  border-radius: 12px;
+
+  cursor: grab;
+
+  z-index: 2;
+
+}
+
+
+.pinned-photo-handle:active {
+
+  cursor: grabbing;
+
+}
+
+
+.pinned-photo-remove {
+
+  position: absolute;
+
+  right: -12px;
+
+  top: -12px;
+
+  width: 30px;
+
+  height: 30px;
+
+  border-radius: 10px;
+
+  font-size: 18px;
+
+  z-index: 2;
+
+}
+
+
+.pinned-photo-resize {
+
+  position: absolute;
+
+  right: -10px;
+
+  bottom: -10px;
+
+  width: 30px;
+
+  height: 30px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  z-index: 2;
+
+  cursor: nwse-resize;
+
+}
+
+
+.pin-photo-popover-backdrop {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(6, 8, 12, 0.28);
+
+  display: grid;
+
+  place-items: center;
+
+  z-index: 70;
+
+}
+
+
+.pin-photo-popover {
+
+  width: min(420px, calc(100vw - 32px));
+
+  padding: 22px 20px 20px;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+    rgba(34, 37, 44, 0.9);
+
+  box-shadow: 0 22px 48px rgba(0,0,0,0.38);
+
+  position: relative;
+
+}
+
+
+.pin-photo-popover-close {
+
+  position: absolute;
+
+  top: 12px;
+
+  right: 12px;
+
+  width: 32px;
+
+  height: 32px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255,255,255,0.14);
+
+  background: rgba(255,255,255,0.06);
+
+  color: rgba(255,255,255,0.92);
+
+  cursor: pointer;
+
+}
+
+
+.pin-photo-popover-title {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: rgba(255,255,255,0.96);
+
+}
+
+
+.pin-photo-popover-text,
+.pin-photo-popover-hint {
+
+  color: rgba(255,255,255,0.8);
+
+  line-height: 1.45;
+
+}
+
+
+.pin-photo-popover-text {
+
+  margin-top: 10px;
+
+  font-size: 14px;
+
+}
+
+
+.pin-photo-popover-hint {
+
+  margin-top: 10px;
+
+  font-size: 13px;
+
+}
+
+
+.pin-photo-popover-action {
+
+  margin-top: 18px;
+
+  width: 100%;
+
+  min-height: 44px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background: rgba(255,255,255,0.1);
+
+  color: rgba(255,255,255,0.96);
+
+  font-size: 14px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+}
+
+
+.pin-photo-popover-action:hover,
+.pin-photo-popover-close:hover {
+
+  background: rgba(255,255,255,0.16);
+
+}
+
+
+.notes-fab {
+
+
+
+  position: fixed;
+
+
+
+  right: 18px;
+
+
+
+  bottom: 18px;
+
+
+
+  width: 46px;
+
+
+
+  height: 46px;
+
+
+
+  border-radius: 16px;
+
+
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+
+
+  background: rgba(20,22,25,0.35);
+
+
+
+  backdrop-filter: blur(6px);
+
+
+
+  color: rgba(255,255,255,0.92);
+
+
+
+  cursor: pointer;
+
+
+
+  display: grid;
+
+
+
+  place-items: center;
+
+
+
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+
+
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+
+
+
+  z-index: 50;
+
+
+
+}
+
+
+
+.notes-fab:hover {
+
+
+
+  transform: translateY(-1px);
+
+
+
+  background: rgba(20,22,25,0.5);
+
+
+
+}
+
+
+
+.notes-panel {
+
+
+
+  position: fixed;
+
+
+
+  top: 92px;
+
+
+
+  right: 0;
+
+
+
+  width: clamp(280px, 38vw, 420px);
+
+
+
+  height: calc(100vh - 120px);
+
+
+
+  transform: translateX(100%);
+
+
+
+  transition: transform .18s ease;
+
+
+
+  background: rgba(20, 22, 25, 0.42);
+
+
+
+  backdrop-filter: blur(6px);
+
+
+
+  border-left: 1px solid rgba(255,255,255,0.12);
+
+
+
+  border-top-left-radius: 18px;
+
+
+
+  border-bottom-left-radius: 18px;
+
+
+
+  padding: 12px;
+
+
+
+  z-index: 60;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  min-height: 0;
+
+
+
+  overflow: hidden;
+
+
+
+}
+
+
+
+.notes-panel.is-open {
+
+
+
+  transform: translateX(0);
+
+
+
+}
+
+
+
+.notes-head {
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: space-between;
+
+
+
+  gap: 10px;
+
+
+
+  padding: 6px 6px 10px;
+
+
+
+  flex: 0 0 auto;
+
+
+
+}
+
+
+
+.notes-title {
+
+
+
+  font-weight: 600;
+
+
+
+  color: rgba(255,255,255,0.9);
+
+
+
+}
+
+
+
+.notes-title::before {
+
+
+
+  content: "📝";
+
+
+
+  margin-right: 8px;
+
+
+
+}
+
+
+
+/* grid тоже не скроллится */
+
+
+
+.notes-grid {
+
+
+
+  display: grid;
+
+
+
+  gap: 10px;
+
+
+
+  padding: 6px 8px;    /* минимальные отступы */
+
+
+
+  box-sizing: border-box;
+
+
+
+  flex: 1 1 auto;
+
+
+
+  min-height: 0;
+
+
+
+  overflow-y: auto;
+
+
+
+  padding-right: 6px;
+
+
+
+  scrollbar-width: thin;
+
+
+
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+
+
+
+}
+
+
+
+.notes-grid::-webkit-scrollbar { width: 8px; }
+
+
+
+.notes-grid::-webkit-scrollbar-track { background: transparent; }
+
+
+
+.notes-grid::-webkit-scrollbar-thumb {
+
+
+
+  background: rgba(255,255,255,0.25);
+
+
+
+  border-radius: 999px;
+
+
+
+}
+
+
+
+.notes-grid::-webkit-scrollbar-thumb:hover {
+
+
+
+  background: rgba(255,255,255,0.4);
+
+
+
+}
+
+
+
+.note {
+
+
+
+  width: 100%;
+
+
+
+  height: 280px;
+
+
+
+  min-height: 280px;
+
+
+
+  max-height: 280px;
+
+
+
+  resize: none;
+
+
+
+  overflow: auto;
+
+
+
+  border-radius: 16px;
+
+
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+
+
+  background: rgba(0,0,0,0.18);
+
+
+
+  color: rgba(255,255,255,0.92);
+
+
+
+  padding: 10px 12px;
+
+
+
+  padding-right: 18px;
+
+
+
+  outline: none;
+
+
+
+  line-height: 1.4;
+
+
+
+  white-space: pre-wrap;
+
+
+
+  overflow-wrap: anywhere;
+
+
+
+  box-sizing: border-box;
+
+
+
+  scrollbar-gutter: stable both-edges;
+
+
+
+  scrollbar-width: thin;
+
+
+
+  scrollbar-color: rgba(255,255,255,0.28) transparent;
+
+
+
+  background-clip: padding-box;
+
+
+
+  clip-path: inset(0 round 16px);
+
+
+
+}
+
+
+
+.note:focus {
+
+
+
+  border-color: rgba(255,255,255,0.22);
+
+
+
+  background: rgba(0,0,0,0.22);
+
+
+
+}
+
+
+
+/* ✅ Подпись просто текстом, без контейнера/плашки */
+
+
+
+.notes-hint {
+
+
+
+  flex: 0 0 auto;
+
+
+
+  margin-top: 8px;
+
+
+
+  font-size: 12px;
+
+
+
+  color: rgba(255,255,255,0.65);
+
+
+
+  padding: 0 8px;      /* просто отступы */
+
+
+
+  background: transparent;
+
+
+
+  border: 0;
+
+
+
+}
+
+
+
+.note::-webkit-scrollbar { width: 6px; }
+
+
+
+.note::-webkit-scrollbar-track { background: transparent; }
+
+
+
+.note::-webkit-scrollbar-thumb {
+
+
+
+  background: rgba(255,255,255,0.25);
+
+
+
+  border-radius: 999px;
+
+
+
+}
+
+
+
+.note::-webkit-scrollbar-thumb:hover {
+
+
+
+  background: rgba(255,255,255,0.38);
+
+
+
+}
+
+
+
+/* ===== Персонажи ===== */
+
+
+
+.characters-fab {
+
+
+
+  position: fixed;
+
+
+
+  right: 18px;
+
+
+
+  bottom: 72px;
+
+
+
+  width: 46px;
+
+
+
+  height: 46px;
+
+
+
+  border-radius: 16px;
+
+
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+
+
+  background: rgba(20,22,25,0.35);
+
+
+
+  backdrop-filter: blur(6px);
+
+
+
+  color: rgba(255,255,255,0.92);
+
+
+
+  display: grid;
+
+
+
+  place-items: center;
+
+
+
+  cursor: pointer;
+
+
+
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+
+
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+
+
+
+  z-index: 50;
+
+
+
+}
+
+
+
+.characters-fab:hover {
+
+
+
+  transform: translateY(-1px);
+
+
+
+  background: rgba(20,22,25,0.5);
+
+
+
+}
+
+
+
+.characters-panel {
+
+
+
+  position: fixed;
+
+
+
+  top: 92px;
+
+
+
+  right: 0;
+
+
+
+  width: clamp(300px, 40vw, 440px);
+
+
+
+  height: calc(100vh - 120px);
+
+
+
+  background: rgba(30, 32, 36, 0.65);
+
+
+
+  border-left: 1px solid rgba(255,255,255,0.12);
+
+
+
+  border-top-left-radius: 18px;
+
+
+
+  border-bottom-left-radius: 18px;
+
+
+
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+
+
+
+  transform: translateX(110%);
+
+
+
+  transition: transform 0.2s ease;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  gap: 10px;
+
+
+
+  padding: 12px;
+
+
+
+  z-index: 60;
+
+
+
+  overflow: hidden;
+
+
+
+  min-height: 0;
+
+
+
+  backdrop-filter: blur(6px);
+
+
+
+  -webkit-backdrop-filter: blur(6px);
+
+
+
+}
+
+
+
+.characters-panel.is-open {
+
+
+
+  transform: translateX(0);
+
+
+
+}
+
+
+
+.characters-head {
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: space-between;
+
+
+
+  gap: 8px;
+
+
+
+  padding: 6px 6px 10px;
+
+
+
+  flex: 0 0 auto;
+
+
+
+  background: rgba(30, 32, 36, 0.65);
+
+
+
+  border-radius: 12px;
+
+
+
+  text-transform: none;
+
+
+
+  letter-spacing: normal;
+
+
+
+}
+
+
+
+.characters-title {
+
+
+
+  font-weight: 600;
+
+
+
+  color: #fff;
+
+
+
+  text-transform: none;
+
+
+
+  letter-spacing: normal;
+
+
+
+}
+
+
+
+.characters-title::before {
+
+
+
+  content: "📝";
+
+
+
+  margin-right: 8px;
+
+
+
+  color: #fff;
+
+
+
+}
+
+
+
+.characters-head-actions {
+
+
+
+  display: flex;
+
+
+
+  gap: 6px;
+
+
+
+}
+
+
+
+.characters-list {
+
+
+
+  flex: 1 1 auto;
+
+
+
+  min-height: 0;
+
+
+
+  overflow: auto;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  gap: 10px;
+
+
+
+  padding-right: 6px;
+
+
+
+  scrollbar-width: none;
+
+
+
+  -ms-overflow-style: none;
+
+
+
+}
+
+
+
+.characters-list::-webkit-scrollbar{
+
+
+
+  width: 0;
+
+
+
+  height: 0;
+
+
+
+}
+
+
+
+.characters-empty {
+
+
+
+  opacity: 1;
+
+
+
+  font-size: 12px;
+
+
+
+  padding: 8px;
+
+
+
+}
+
+
+
+.character-card {
+
+
+
+  border-radius: 16px;
+
+
+
+  border: 1px solid rgba(255,255,255,0.16);
+
+
+
+  background: rgba(30, 32, 36, 0.35);
+
+
+
+  overflow: hidden;
+
+
+
+  flex: 0 0 auto;
+
+
+
+}
+
+
+
+.character-card__toggle {
+
+
+
+  width: 100%;
+
+
+
+  border: 0;
+
+
+
+  background: transparent;
+
+
+
+  color: rgba(255,255,255,0.92);
+
+
+
+  padding: 10px 12px;
+
+
+
+  min-height: 44px;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: space-between;
+
+
+
+  cursor: pointer;
+
+
+
+  font-weight: 600;
+
+
+
+}
+
+
+
+.character-card__name {
+
+
+
+  font-size: 14px;
+
+
+
+  white-space: nowrap;
+
+
+
+  overflow: hidden;
+
+
+
+  text-overflow: ellipsis;
+
+
+
+}
+
+
+
+.character-card__chev {
+
+
+
+  opacity: 0.7;
+
+
+
+}
+
+
+
+.character-card__body {
+
+
+
+  padding: 10px 12px 12px;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  gap: 10px;
+
+
+
+  background: rgba(255,255,255,0.02);
+
+
+
+  max-height: 58vh;
+
+
+
+  overflow: auto;
+
+
+
+  padding-right: 6px;
+
+
+
+  scrollbar-gutter: stable;
+
+
+
+  scrollbar-width: thin;
+
+
+
+  scrollbar-color: rgba(255,255,255,0.32) transparent;
+
+
+
+  position: relative;
+
+
+
+}
+
+
+
+.character-card__body::-webkit-scrollbar{
+
+
+
+  width: 8px;
+
+
+
+  height: 8px;
+
+
+
+}
+
+.character-card__body::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+.character-card__body::-webkit-scrollbar-thumb {
+
+  background: rgba(255,255,255,0.28);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+
+}
+
+.character-card__body::-webkit-scrollbar-thumb:hover {
+
+  background: rgba(255,255,255,0.44);
+  border: 2px solid transparent;
+  background-clip: content-box;
+
+}
+
+
+
+.character-card__row {
+
+
+
+  display: grid;
+
+
+
+  grid-template-columns: 96px 1fr;
+
+
+
+  gap: 12px;
+
+
+
+  align-items: start;
+
+
+
+}
+
+
+
+.character-avatar {
+
+
+
+  width: 96px;
+
+
+
+  height: 96px;
+
+
+
+  border-radius: 18px;
+
+
+
+  object-fit: cover;
+
+
+
+  border: 1px solid rgba(255,255,255,0.22);
+
+
+
+}
+
+
+
+.character-avatar.placeholder {
+
+
+
+  display: grid;
+
+
+
+  place-items: center;
+
+
+
+  background: rgba(255,255,255,0.08);
+
+
+
+  color: rgba(255,255,255,0.8);
+
+
+
+  font-size: 20px;
+
+
+
+}
+
+
+
+.character-card__main {
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  gap: 8px;
+
+
+
+}
+
+
+
+.character-input {
+
+
+
+  font-size: 13px;
+
+
+
+}
+
+
+
+.character-upload{
+
+
+
+  align-self: flex-start;
+
+
+
+}
+
+
+
+.character-fields {
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  gap: 10px;
+
+
+
+  overflow-y: auto;
+
+
+
+  padding-right: 6px;
+
+
+
+  scrollbar-gutter: stable;
+
+
+
+  scrollbar-width: thin;
+
+
+
+  scrollbar-color: rgba(255,255,255,0.32) transparent;
+
+
+
+}
+
+
+
+.character-fields::-webkit-scrollbar{
+
+
+
+  width: 8px;
+
+
+
+  height: 8px;
+
+
+
+}
+
+.character-fields::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+.character-fields::-webkit-scrollbar-thumb {
+
+  background: rgba(255,255,255,0.28);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+
+}
+
+.character-fields::-webkit-scrollbar-thumb:hover {
+
+  background: rgba(255,255,255,0.44);
+  border: 2px solid transparent;
+  background-clip: content-box;
+
+}
+
+
+
+.character-field__label {
+
+
+
+  font-size: 12px;
+
+
+
+  opacity: 0.7;
+
+
+
+  margin-bottom: 4px;
+
+
+
+}
+
+
+
+.character-textarea {
+
+
+
+  min-height: 70px;
+
+
+
+  resize: vertical;
+
+
+
+  background: rgba(0,0,0,0.18);
+
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.28) transparent;
+
+
+
+}
+
+.character-textarea::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+
+.character-textarea::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+.character-textarea::-webkit-scrollbar-thumb {
+
+  background: rgba(255,255,255,0.24);
+  border: 1px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+
+}
+
+.character-textarea::-webkit-scrollbar-thumb:hover {
+
+  background: rgba(255,255,255,0.4);
+  border: 1px solid transparent;
+  background-clip: content-box;
+
+}
+
+
+
+.character-remove {
+
+
+
+  align-self: flex-end;
+
+
+
+}
+
+
+
+@media (max-width: 1024px){
+
+
+
+  .editor-root{
+
+
+
+    height: 100%;
+
+
+
+  }
+
+
+
+  .editor-top{
+
+
+
+    padding: 12px 14px;
+
+
+
+  }
+
+
+
+  .editor-toolbar{
+
+
+
+    padding: 8px 14px;
+
+
+
+  }
+
+
+
+  .editor-area{
+
+
+
+    padding: 18px 14px calc(22px + env(safe-area-inset-bottom));
+
+
+
+  }
+
+
+
+  .editor-paper{
+
+
+
+    width: min(980px, 94vw);
+
+
+
+    border-radius: 18px;
+
+
+
+  }
+
+
+
+  .fw-editor{
+
+
+
+    padding: 22px 28px 22px 32px;
+
+
+
+  }
+
+
+
+  .notes-panel{
+
+
+
+    top: 80px;
+
+
+
+    height: calc(100vh - 100px);
+
+
+
+  }
+
+
+
+  .characters-panel{
+
+
+
+    top: 80px;
+
+
+
+    height: calc(100vh - 100px);
+
+
+
+  }
+
+
+
+}
+
+
+
+@media (max-width: 860px){
+
+
+
+  .editor-top{
+
+
+
+    grid-template-columns: 1fr;
+
+
+
+    gap: 10px;
+
+
+
+  }
+
+
+
+  .editor-title{
+
+
+
+    font-size: 18px;
+
+
+
+  }
+
+
+
+  .editor-top-right{
+
+
+
+    justify-content: flex-start;
+
+
+
+    flex-wrap: wrap;
+
+
+
+  }
+
+
+
+  .editor-toolbar{
+
+
+
+    gap: 8px;
+
+
+
+  }
+
+
+
+  .editor-paper{
+
+
+
+    width: min(900px, 96vw);
+
+
+
+  }
+
+
+
+  .fw-editor{
+
+
+
+    padding: 20px 22px 20px 26px;
+
+
+
+  }
+
+
+
+  .notes-panel,
+
+
+
+  .characters-panel{
+
+
+
+    width: min(92vw, 420px);
+
+
+
+    border-top-left-radius: 16px;
+
+
+
+    border-bottom-left-radius: 16px;
+
+
+
+  }
+
+
+
+}
+
+
+
+@media (max-width: 720px){
+
+
+
+  .editor-top{
+
+
+
+    padding: 10px 12px;
+
+
+
+  }
+
+
+
+  .editor-toolbar{
+
+
+
+    padding: 6px 10px;
+
+
+
+  }
+
+
+
+  .editor-area{
+
+
+
+    padding: 14px 10px calc(18px + env(safe-area-inset-bottom));
+
+
+
+  }
+
+
+
+  .editor-paper{
+
+
+
+    width: 98vw;
+
+
+
+    border-radius: 16px;
+
+
+
+  }
+
+
+
+  .fw-editor{
+
+
+
+    padding: 18px 18px 18px 22px;
+
+
+
+  }
+
+
+
+  .notes-panel,
+
+
+
+  .characters-panel{
+
+
+
+    top: 70px;
+
+
+
+    height: calc(100vh - 90px);
+
+
+
+    width: 96vw;
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
