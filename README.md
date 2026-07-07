@@ -1,9 +1,5 @@
 # FicWriter
 
-## Contact me
-- Telegram: `https://t.me/viktorelff`
-- Discord: `vouarthefelling`
-
 ## Error logs
 If the app misbehaves, send the log file to the developer.
 
